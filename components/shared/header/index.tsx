@@ -1,8 +1,16 @@
+'use client';
+
 import { ShoppingCart, UserIcon } from 'lucide-react';
 import logo from '@/public/images/logo.svg';
 import Link from 'next/link';
 import Image from 'next/image';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 import { APP_NAME } from '@/lib';
+
+const StyledButton = styled(Button)({
+  textTransform: 'none',
+});
 
 const Header = () => {
   return (
@@ -20,12 +28,22 @@ const Header = () => {
             <span className="hidden lg:block font-bold text-2xl ml-3">
               {APP_NAME}
             </span>
-            <span className="block lg:hidden font-bold ml-3 text-blue-500">
-              {APP_NAME} ffff
-            </span>
           </Link>
         </div>
-        <div className="space-x-2"></div>
+        <div className="space-x-2">
+          <Link href="/cart">
+            <StyledButton variant="outlined" color="primary">
+              <ShoppingCart size={16} className="mr-2" />
+              Cart
+            </StyledButton>
+          </Link>
+          <Link href="/login">
+            <StyledButton variant="outlined" color="primary">
+              <UserIcon size={16} className="mr-2" />
+              Sign In
+            </StyledButton>
+          </Link>
+        </div>
       </div>
     </header>
   );
