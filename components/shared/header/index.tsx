@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { APP_NAME } from '@/lib';
+import ModeToggle from './mode-toggle';
 
 const StyledButton = styled(Button)({
   textTransform: 'none',
@@ -31,14 +32,15 @@ const Header = () => {
           </Link>
         </div>
         <div className="space-x-2">
+          <ModeToggle />
           <Link href="/cart">
-            <StyledButton variant="outlined" color="primary">
+            <StyledButton variant="text" color="primary">
               <ShoppingCart size={16} className="mr-2" />
               Cart
             </StyledButton>
           </Link>
           <Link href="/login">
-            <StyledButton variant="outlined" color="primary">
+            <StyledButton variant="contained" color="primary">
               <UserIcon size={16} className="mr-2" />
               Sign In
             </StyledButton>
