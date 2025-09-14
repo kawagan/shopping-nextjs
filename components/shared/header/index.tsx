@@ -1,17 +1,10 @@
 'use client';
 
-import { ShoppingCart, UserIcon } from 'lucide-react';
 import logo from '@/public/images/logo.svg';
 import Link from 'next/link';
 import Image from 'next/image';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import { APP_NAME } from '@/lib';
-import ModeToggle from './mode-toggle';
-
-const StyledButton = styled(Button)({
-  textTransform: 'none',
-});
+import Menu from './menu';
 
 const Header = () => {
   return (
@@ -32,19 +25,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="space-x-2">
-          <ModeToggle />
-          <Link href="/cart">
-            <StyledButton variant="text" color="primary">
-              <ShoppingCart size={16} className="mr-2" />
-              Cart
-            </StyledButton>
-          </Link>
-          <Link href="/login">
-            <StyledButton variant="contained" color="primary">
-              <UserIcon size={16} className="mr-2" />
-              Sign In
-            </StyledButton>
-          </Link>
+          <Menu />
         </div>
       </div>
     </header>
