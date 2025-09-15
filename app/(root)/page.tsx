@@ -5,8 +5,6 @@ import { LATEST_PRODUCTS_LIMIT } from '@/lib/constants';
 const Home = async () => {
   const latestProducts = await getLatestProducts();
 
-  console.log('Latest Products:', latestProducts);
-
   return (
     <>
       <ProductList data={latestProducts} title="Newest Arrivals" />
