@@ -1,5 +1,5 @@
 'use client';
-import { APP_NAME } from '@/lib';
+import { APP_NAME } from '@/lib/constants';
 import { Button } from '@mui/material';
 import Image from 'next/image';
 const NotFound = () => {

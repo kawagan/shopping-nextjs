@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, Link } from '@mui/material';
 import Image from 'next/image';
 import ProductPrice from './produc-price';
+import { convertToPlainObject } from '@/lib/utils';
 
 const ProductCard = ({ product }: { product: any }) => {
   return (

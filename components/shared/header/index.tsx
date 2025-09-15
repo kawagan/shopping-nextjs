@@ -3,7 +3,7 @@
 import logo from '@/public/images/logo.svg';
 import Link from 'next/link';
 import Image from 'next/image';
-import { APP_NAME } from '@/lib';
+import { APP_NAME } from '@/lib/constants';
 import Menu from './menu';
 
 const Header = () => {
