@@ -1,4 +1,5 @@
 import ProductPrice from '@/components/shared/header/product/produc-price';
+import ProductImages from '@/components/shared/header/product/product-images';
 import { getProductBySlug } from '@/lib/actions/product.actions';
 import { Badge, Button, Card, CardContent } from '@mui/material';
 import Chip from '@mui/material/Chip';
@@ -20,7 +21,9 @@ const ProductDetailsPage = async ({
       <section>
         <div className="grid grid-cols-1 md:grid-cols-5">
           {/* Images Column */}
-          <div className="col-span-2">{/* Add Images */}</div>
+          <div className="col-span-2">
+            <ProductImages images={product.images} />
+          </div>
 
           {/* Details Column */}
           <div className="col-span-2 p-5">
