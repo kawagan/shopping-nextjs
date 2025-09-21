@@ -1,7 +1,7 @@
 import ProductPrice from '@/components/shared/header/product/produc-price';
 import ProductImages from '@/components/shared/header/product/product-images';
 import { getProductBySlug } from '@/lib/actions/product.actions';
-import { Badge, Button, Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 import Chip from '@mui/material/Chip';
 import { notFound } from 'next/navigation';
 
