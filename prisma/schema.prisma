@@ -30,3 +30,61 @@ model Product {
   banner      String?
   createdAt   DateTime @default(now()) @db.Timestamptz(6)
 }
+
+// we use this User model and Account model for authentication from next-auth: https://authjs.dev/getting-started/adapters/prisma
+
+model User {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String    @default("NO_NAME")
+  email          String    @unique(map: "user_email_idx")
+  emailVerified  DateTime? @db.Timestamptz(6)
+  image          String?
+  password       String?
+  role           String    @default("user")
+  addresses      Json?     @db.JsonB
+  paymentMethods String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  Account        Account[]
+  Session        Session[]
+}
+
+model Account {
+  userId            String  @db.Uuid
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // create compound primary key better create primary id
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @id
+  userId       String   @db.Uuid
+  expires      DateTime @db.Timestamptz(6)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
