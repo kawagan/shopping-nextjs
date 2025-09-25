@@ -6,7 +6,9 @@ import { PrismaClient } from '@/lib/generated/prisma';
 export const prisma = new PrismaClient({
   log:
     process.env.NODE_ENV === 'development'
-      ? ['query', 'error', 'warn']
+      ? process.env.PRISMA_ENABLE_QUERY_LOG === 'true'
+        ? ['query', 'error', 'warn']
+        : ['error', 'warn']
       : ['error'],
   // Enable connection pooling for better performance with Neon
   datasourceUrl: process.env.DATABASE_URL,

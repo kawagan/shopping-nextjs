@@ -1,10 +1,8 @@
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/db/prisma';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compareSync } from 'bcryptjs';
-import type { NextAuthOptions, Session, User } from 'next-auth';
-import type { JWT } from 'next-auth/jwt';
 
 // Extend the built-in session types
 declare module 'next-auth' {
@@ -19,7 +17,7 @@ declare module 'next-auth' {
   }
 }
 
-export const config: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/auth/signin',
     signOut: '/auth/signout',
@@ -61,24 +59,21 @@ export const config: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({
-      session,
-      token,
-      trigger,
-      user,
-    }: {
-      session: Session;
-      token: JWT;
-      trigger?: 'update';
-      user?: User;
-    }) {
-      session.user.id = token.sub || '';
-      if (trigger === 'update' && user?.name) {
-        session.user.name = user.name;
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub || '';
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth(config);
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
+export { authOptions };
