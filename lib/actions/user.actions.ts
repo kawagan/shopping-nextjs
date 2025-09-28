@@ -27,7 +27,7 @@ export async function signinWithCredentials(
 // signout the user
 export async function signout() {
   try {
-    await signOut({ callbackUrl: '/' });
+    await signOut();
     return { success: true, message: 'Signed out successfully' };
   } catch (error) {
     if (isRedirectError(error)) {
