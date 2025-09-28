@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/images/logo.svg';
+import CredentialsSignInForm from './credentials-signin-form';
 
 const SignInPage = () => {
   return (
@@ -22,9 +23,9 @@ const SignInPage = () => {
         <CardContent className="space-y-4">
           <div className="text-center space-y-2">
             <h1 className="text-2xl font-bold">Sign In</h1>
-            <p className="text-gray-600 text-sm">
-              Welcome back! Please sign in to your account to continue shopping.
-            </p>
+            <div className="mt-4">
+              <CredentialsSignInForm />
+            </div>
           </div>
         </CardContent>
       </Card>
