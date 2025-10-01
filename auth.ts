@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import NextAuth, { NextAuthOptions, getServerSession } from 'next-auth';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/db/prisma';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -19,8 +19,8 @@ declare module 'next-auth' {
 
 const authOptions: NextAuthOptions = {
   pages: {
-    signIn: '/auth/signin',
-    signOut: '/auth/signout',
+    signIn: '/sign-in',
+    signOut: '/sign-out',
     error: '/auth/error', // Error code passed in query string as ?error=
   },
   session: {
@@ -75,5 +75,9 @@ const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };
 export { authOptions };
+
+// For NextAuth v4, we need to use getServerSession instead of auth()
+export const auth = () => getServerSession(authOptions);

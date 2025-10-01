@@ -1,13 +1,20 @@
-'use client';
-
 import { APP_NAME } from '@/lib/constants';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/images/logo.svg';
 import CredentialsSignInForm from './credentials-signin-form';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
-const SignInPage = () => {
+const SignInPage = async () => {
+  // in this way we get the session on server side
+  // and if the user is already logged in
+  // we redirect him to the home page
+  const session = await auth();
+  if (session) {
+    return redirect('/');
+  }
   return (
     <div className="w-full max-w-md mx-auto">
       <Card>

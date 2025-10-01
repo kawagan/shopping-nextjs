@@ -79,7 +79,7 @@ const Menu = () => {
             Cart
           </StyledButton>
         </Link>
-        <Link href="/login">
+        <Link href="/sign-in">
           <StyledButton variant="contained" color="primary">
             <UserIcon size={16} className="mr-2" />
             Sign In
